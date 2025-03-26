@@ -1,3 +1,67 @@
+Übersetzung von ChatGPT
+# Arylic-AMP-Display-UART-PRO
+
+**0,91" OLED-Display für Arylic AMP-Geräte**
+
+Anzeige-Steuerung mit ESP32 und 0,91” OLED-Display
+
+Dieses Projekt nutzt ein ESP32S zusammen mit einem 0,91” OLED-Display, um Informationen über den Status eines Audioverstärkers anzuzeigen. Der Code ermöglicht den Empfang von Befehlen über eine UART-Kommunikation (Seriell), um zwischen verschiedenen Anzeigemodi zu wechseln, wie z. B. Signalquelle, Lautstärke, Bass, Höhen und mehr. Zusätzlich wurde eine STANDBY-Funktion implementiert, die eine "STANDBY"-Meldung auf dem Display anzeigt und alle 2 Sekunden blinkt, bis ein Befehl zum Wechsel zurück in den SOURCE-Modus empfangen wird.
+Verwendete Komponenten
+
+    ESP32 (in diesem Beispiel wurde ein NodeMCU ESP32S verwendet)
+
+    OLED-Display (ein I2C-OLED-Display mit 128x32 Pixeln wurde genutzt)
+
+    Audioverstärker mit der Fähigkeit, UART-Befehle über seinen seriellen Port zu senden (up2Stream PRO_V4)
+
+**Verbindungen**
+
+Verbinde die Komponenten wie folgt:
+
+    OLED-Display:
+        VCC-Pin → 5V
+        GND-Pin → GND
+        SDA-Pin → SDA-Pin des ESP32 (z. B. Pin 21)
+        SCL-Pin → SCL-Pin des ESP32 (z. B. Pin 22)
+
+    ESP32-Modul:
+        VCC → 5V
+        GND → GND
+        RX → TX des Verstärkers (z. B. Pin 16)
+        TX → RX des Verstärkers (z. B. Pin 17)
+
+    Audioverstärker:
+        Seriellen Port des Verstärkers mit der UART des ESP32 verbinden (z. B. GND, RX_PIN und TX_PIN)
+
+**Verwendete Bibliotheken**
+
+Der Code nutzt folgende Bibliotheken für den korrekten Betrieb des OLED-Displays und der UART-Kommunikation:
+    Wire.h – Für die I2C-Kommunikation mit dem OLED-Display
+    Adafruit_GFX.h – Für die Handhabung von Grafiken und Text auf dem OLED-Display
+    Adafruit_SSD1306.h – Zur Steuerung des OLED-Displays
+    HardwareSerial.h – Für die serielle UART-Kommunikation mit dem Audioverstärker
+
+**Funktionen**
+    Der Code empfängt Befehle über UART und wechselt zwischen verschiedenen Anzeigemodi.
+    Anzeigemodi umfassen: Signalquelle, Lautstärke, Bass, Höhen und einen noch nicht implementierten "BLANK"-Modus zum Ausschalten des Displays.
+    Der STANDBY-Modus zeigt eine "STANDBY"-Meldung an und lässt das Display alle 2 Sekunden blinken, bis ein Befehl zum Wechsel in den SOURCE-Modus empfangen wird.
+    Es können bestimmte Befehle verarbeitet werden (SRC, VOL, BAS, TRE, CHN, LED, BTC, VBS, BEP), um die Anzeige entsprechend zu aktualisieren.
+
+**Verwendung**
+
+    Verbinde die Komponenten gemäß der "Verbindungen"-Sektion.
+    Lade den Code mit der Arduino-IDE auf den ESP32 hoch.
+    Schließe den Audioverstärker an und stelle sicher, dass er UART-Befehle über den seriellen Port sendet.
+    Beobachte die Anzeige und steuere die verschiedenen Anzeigemodi, indem du die entsprechenden Befehle über UART sendest.
+
+**Hinweise**
+    Falls du weitere Befehle oder Funktionen hinzufügen möchtest, kannst du die Funktion processUARTCommand anpassen, um neue Befehle zu verarbeiten und die Anzeige entsprechend zu aktualisieren.
+
+**Credits**
+Dieses Projekt wurde von Richard Mequert [Zerous] erstellt und basiert auf der Arbeit von ResinChem Tech sowie der Dokumentation der verwendeten Bibliotheken.
+
+-------
+
 # Arylic-AMP-Display-UART-PRO
 0.91" Oled Display for Arylic AMP Devices
 
